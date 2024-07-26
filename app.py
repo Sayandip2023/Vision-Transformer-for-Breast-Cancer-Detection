@@ -10,8 +10,8 @@ model = load_model("C:/Users/sayan/Downloads/vgg16.h5")
 
 # Define the paths to the two images
 image_paths = {
-    "Image 1": "C:/Users/sayan/Downloads/Screenshot_2024-07-26_104257.png",
-    "Image 2": "C:/Users/sayan/Downloads/Screenshot_2024-07-26_104109.png"
+    "Image 1": "Screenshot 2024-07-26 104109.png",
+    "Image 2": "Screenshot 2024-07-26 104257.png"
 }
 
 # Define the function to preprocess the image
@@ -27,7 +27,7 @@ def preprocess_image(image):
 
 # Define the main function to run the Streamlit app
 def main():
-    st.title("Image Classification with VGG16")
+    st.title("HealthNexus Software Solutions")
 
     # Create a 2-column layout for image selection
     col1, col2 = st.columns(2)
@@ -54,8 +54,14 @@ def main():
         prediction = model.predict(image_array)
         predicted_class = np.argmax(prediction, axis=1)[0]  # Assuming the output is one-hot encoded
 
+        # Map the prediction to labels
+        if predicted_class == 0:
+            result_message = "The model predicts this image is benign."
+        else:
+            result_message = "The model predicts this image is malignant."
+
         # Display the prediction
-        st.write(f"Predicted class: {predicted_class}")
+        st.write(result_message)
 
 if __name__ == "__main__":
     main()
